@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
     #endif
 
     int arraySize = ARRAYSIZE;
-    cout << "ArraySize" << arraySize << endl;
+    cout << "ArraySize: " << arraySize << endl;
     int threadArray[] = {1, 2, 4, 6, 8, 12, 16};
     int threadArraySize = sizeof(threadArray)/sizeof(threadArray[0]);
 
