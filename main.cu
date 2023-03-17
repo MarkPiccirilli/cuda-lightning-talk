@@ -38,15 +38,15 @@ int main(int argc, char **argv) {
     return 1;
     #endif
 
-    int arraySize = ARRAYSIZE;
+    long int arraySize = ARRAYSIZE;
     cout << "ArraySize: " << arraySize << endl;
     cout << "NumTries: " << NUMTRIES << endl;
     int threadArray[] = {1, 2, 4, 6, 8, 12, 16};
     int threadArraySize = sizeof(threadArray)/sizeof(threadArray[0]);
 
-    int* hostArray1 = new int[arraySize];
-    int* hostArray2 = new int[arraySize];
-    int* hostArray3 = new int[arraySize];
+    long int* hostArray1 = new int[arraySize];
+    long int* hostArray2 = new int[arraySize];
+    long int* hostArray3 = new int[arraySize];
 
     for(int i = 0; i < arraySize; i++) {
         hostArray1[i] = rand() % 100;
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
         cout << "Time to complete operation with " << threadArray[i] << " threads(ms): " << averageTime * 1000 << endl;
     }
 
-    int *deviceArray1, *deviceArray2, *deviceArray3;
+    long int *deviceArray1, *deviceArray2, *deviceArray3;
     cudaMallocManaged(&deviceArray1, arraySize * sizeof(int));
     cudaMallocManaged(&deviceArray2, arraySize * sizeof(int));
     cudaMallocManaged(&deviceArray3, arraySize * sizeof(int));
