@@ -4,16 +4,16 @@
 #include <math.h>
 
 #ifndef ARRAYSIZE
-#define ARRAYSIZE 100000000
+#define ARRAYSIZE 1000000000
 #endif
 
 #ifndef BLOCKSIZE
 #define BLOCKSIZE 256
 #endif
 
-#ifndef NUMBLOCKS
-#define NUMBLOCKS NULL
-#endif
+//#ifndef NUMBLOCKS
+//#define NUMBLOCKS NULL
+//#endif
 
 #ifndef NUMTRIES
 #define NUMTRIES 50
@@ -72,11 +72,11 @@ int main(int argc, char **argv) {
     }
 
     long long *deviceArray1, *deviceArray2, *deviceArray3;
-    cudaMallocManaged(&deviceArray1, arraySize * sizeof(int));
-    cudaMallocManaged(&deviceArray2, arraySize * sizeof(int));
-    cudaMallocManaged(&deviceArray3, arraySize * sizeof(int));
+    cudaMallocManaged(&deviceArray1, arraySize * sizeof(long long));
+    cudaMallocManaged(&deviceArray2, arraySize * sizeof(long long));
+    cudaMallocManaged(&deviceArray3, arraySize * sizeof(long long));
 
-    cudaMemcpy(deviceArray1, hostArray1, arraySize * sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(deviceArray1, hostArray1, arraySize * sizeof(long long), cudaMemcpyHostToDevice);
 
     //allocate CUDA events for timing
     cudaEvent_t start, stop;
@@ -84,8 +84,9 @@ int main(int argc, char **argv) {
     cudaEventCreate(&stop);
 
     int blockSize = BLOCKSIZE;
-    int numBlocks = NUMBLOCKS ? NUMBLOCKS : (arraySize + blockSize - 1) / blockSize;
-
+    //int numBlocks = NUMBLOCKS ? NUMBLOCKS : (arraySize + blockSize - 1) / blockSize;
+    int numBlocks = (arraySize + blockSize - 1) / blockSize;
+	
     double totalTimeGPU = 0.0;
     for(int i = 0; i < NUMTRIES; i++) {
         cudaEventRecord(start, NULL);
