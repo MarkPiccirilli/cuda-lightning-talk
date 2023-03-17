@@ -4,7 +4,7 @@
 #include <math.h>
 
 #ifndef ARRAYSIZE
-#define ARRAYSIZE 1000000
+#define ARRAYSIZE 100000000
 #endif
 
 #ifndef BLOCKSIZE
@@ -39,6 +39,7 @@ int main(int argc, char **argv) {
     #endif
 
     int arraySize = ARRAYSIZE;
+    cout << "ArraySize" << arraySize;
     int threadArray[] = {1, 2, 4, 6, 8, 12, 16};
     int threadArraySize = sizeof(threadArray)/sizeof(threadArray[0]);
 
@@ -83,9 +84,6 @@ int main(int argc, char **argv) {
 
     int blockSize = BLOCKSIZE;
     int numBlocks = NUMBLOCKS ? NUMBLOCKS : (arraySize + blockSize - 1) / blockSize;
-
-    cout << "Block Size: " << blockSize << endl;
-    cout << "Number of Blocks: " << numBlocks << endl;
 
     double totalTimeGPU = 0.0;
     for(int i = 0; i < NUMTRIES; i++) {
