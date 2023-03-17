@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
     #endif
 
     int arraySize = ARRAYSIZE;
-    cout << "ArraySize" << arraySize;
+    cout << "ArraySize" << arraySize << endl;
     int threadArray[] = {1, 2, 4, 6, 8, 12, 16};
     int threadArraySize = sizeof(threadArray)/sizeof(threadArray[0]);
 
@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
         }
         double averageTime = totalTime / NUMTRIES;
 
-        cout << "Time to complete operation with " << threadArray[i] << " threads(ms): " << averageTime * 1000 << '\n';
+        cout << "Time to complete operation with " << threadArray[i] << " threads(ms): " << averageTime * 1000 << endl;
     }
 
     int *deviceArray1, *deviceArray2, *deviceArray3;
@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
 
     double averageTimeGPU = totalTimeGPU / NUMTRIES;
 
-    cout << "Time to complete operation with the GPU using blocksize: " << blockSize << " and numBlocks: " << numBlocks << " was(ms): " << averageTimeGPU << '\n';
+    cout << "Time to complete operation with the GPU using blocksize: " << blockSize << " and numBlocks: " << numBlocks << " was(ms): " << averageTimeGPU << endl;
 
     // Free memory
     delete [] hostArray1;
