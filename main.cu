@@ -44,9 +44,9 @@ int main(int argc, char **argv) {
     int threadArray[] = {1, 2, 4, 6, 8, 12, 16};
     int threadArraySize = sizeof(threadArray)/sizeof(threadArray[0]);
 
-    long* hostArray1 = new long int[arraySize];
-    long* hostArray2 = new long int[arraySize];
-    long* hostArray3 = new long int[arraySize];
+    long* hostArray1 = new long[arraySize];
+    long* hostArray2 = new long[arraySize];
+    long* hostArray3 = new long[arraySize];
 
     for(int i = 0; i < arraySize; i++) {
         hostArray1[i] = rand() % 100;
