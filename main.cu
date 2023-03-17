@@ -16,7 +16,7 @@
 #endif
 
 #ifndef NUMTRIES
-#define NUMTRIES 5
+#define NUMTRIES 50
 #endif
 
 using std::cout;
@@ -24,7 +24,7 @@ using std::cerr;
 using std:: endl;
 
 __global__
-void cudaMultiply(long *array1, long *array2, long *array3, long size) {
+void cudaMultiply(long long *array1, long long *array2, long long *array3, long long size) {
     int index = blockIdx.x * blockDim.x + threadIdx.x;
     int stride = blockDim.x * gridDim.x;
     for (int i = index; i < size; i += stride)
@@ -38,15 +38,15 @@ int main(int argc, char **argv) {
     return 1;
     #endif
 
-    long arraySize = ARRAYSIZE;
+    long long arraySize = ARRAYSIZE;
     cout << "ArraySize: " << arraySize << endl;
     cout << "NumTries: " << NUMTRIES << endl;
     int threadArray[] = {1, 2, 4, 6, 8, 12, 16};
     int threadArraySize = sizeof(threadArray)/sizeof(threadArray[0]);
 
-    long* hostArray1 = new long[arraySize];
-    long* hostArray2 = new long[arraySize];
-    long* hostArray3 = new long[arraySize];
+    long long* hostArray1 = new long long[arraySize];
+    long long* hostArray2 = new long long[arraySize];
+    long long* hostArray3 = new long long[arraySize];
 
     for(int i = 0; i < arraySize; i++) {
         hostArray1[i] = rand() % 100;
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
         cout << "Time to complete operation with " << threadArray[i] << " threads(ms): " << averageTime * 1000 << endl;
     }
 
-    long *deviceArray1, *deviceArray2, *deviceArray3;
+    long long *deviceArray1, *deviceArray2, *deviceArray3;
     cudaMallocManaged(&deviceArray1, arraySize * sizeof(int));
     cudaMallocManaged(&deviceArray2, arraySize * sizeof(int));
     cudaMallocManaged(&deviceArray3, arraySize * sizeof(int));
