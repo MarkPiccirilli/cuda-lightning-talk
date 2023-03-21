@@ -77,6 +77,7 @@ int main(int argc, char **argv) {
     cudaMallocManaged(&deviceArray3, arraySize * sizeof(long long));
 
     cudaMemcpy(deviceArray1, hostArray1, arraySize * sizeof(long long), cudaMemcpyHostToDevice);
+    cudaMemcpy(deviceArray2, hostArray2, arraySize * sizeof(long long), cudaMemcpyHostToDevice);
 
     //allocate CUDA events for timing
     cudaEvent_t start, stop;
@@ -91,6 +92,7 @@ int main(int argc, char **argv) {
     for(int i = 0; i < NUMTRIES; i++) {
         cudaEventRecord(start, NULL);
         cudaMultiply<<<numBlocks, blockSize>>>(deviceArray1, deviceArray2, deviceArray3, arraySize);
+
         cudaEventRecord(stop, NULL);
         cudaEventSynchronize(stop);
 
@@ -103,6 +105,12 @@ int main(int argc, char **argv) {
     double averageTimeGPU = totalTimeGPU / NUMTRIES;
 
     cout << "Time to complete operation with the GPU using blocksize: " << blockSize << " and numBlocks: " << numBlocks << " was(ms): " << averageTimeGPU << endl;
+
+    for(long long i=0; i < arraySize; i++) {
+        if(hostArray3[i] !== deviceArray3[i]) {
+            cout << "ERROR IN CALCULATION" << endl;
+        }
+    }
 
     // Free memory
     delete [] hostArray1;
