@@ -104,7 +104,9 @@ int main(int argc, char **argv) {
 
     double averageTimeGPU = totalTimeGPU / NUMTRIES;
 
-    cout << "Time to complete operation with the GPU using blocksize: " << blockSize << " and numBlocks: " << numBlocks << " was(ms): " << averageTimeGPU << endl;
+    cout << "Block Sise: " << blockSize << endl;
+    cout << "Number of blocks: " << numBlocks << endl;
+    cout << "Time to complete GPU operation(ms): " << averageTimeGPU << endl;
 
     for(long long i=0; i < arraySize; i++) {
         if(hostArray3[i] !== deviceArray3[i]) {
