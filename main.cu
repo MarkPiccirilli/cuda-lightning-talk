@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
     cout << "Time to complete GPU operation(ms): " << averageTimeGPU << endl;
 
     for(long long i=0; i < arraySize; i++) {
-        if(hostArray3[i] !== deviceArray3[i]) {
+        if(hostArray3[i] != deviceArray3[i]) {
             cout << "ERROR IN CALCULATION" << endl;
         }
     }
